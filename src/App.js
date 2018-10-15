@@ -13,8 +13,9 @@ class App extends Component {
             page: 0,
             data: this.getDataByPage(0)
         };
-        this.onNextPageClick = this.onNextPageClick.bind(this);
+        this.onPageClick = this.onPageClick.bind(this);
     }
+
     getDataByPage(page) {
         let getRow = (key, companyName, base, equity, signBonus, yearlyBonus) => (
             <semantic.Table.Row key={key}>
@@ -32,18 +33,19 @@ class App extends Component {
         }
         return ret;
     }
-    onNextPageClick() {
+
+    onPageClick(page) {
+        if (page < 0 || page > this.getTotalPageCount()) {
+            return;
+        } 
         this.setState(state => {
-            let np = state.page + 1;
             return {
-                page: np,
-                data: this.getDataByPage(np)
+                page,
+                data: this.getDataByPage(page)
             }
         })
     }
-    onPreviousPageClick() {
-        console.warn('previous')
-    }
+
     getTotalPageCount() {
         return Math.ceil(data.length / PAGE_SIZE);
     }
@@ -66,11 +68,11 @@ class App extends Component {
                     <semantic.Table.Row>
                         <semantic.Table.HeaderCell colSpan='6'>
                             <semantic.Menu floated='right' pagination>
-                                <semantic.Menu.Item as='a' icon>
+                                <semantic.Menu.Item as='a' icon onClick={() => this.onPageClick(this.state.page - 1)}>
                                     <semantic.Icon name='chevron left' />
                                 </semantic.Menu.Item>
                                 <semantic.Menu.Item as='a' selectable='true' active>{this.state.page + 1}</semantic.Menu.Item>
-                                <semantic.Menu.Item as='a' selectable='true' icon onClick={this.onNextPageClick}>
+                                <semantic.Menu.Item as='a' selectable='true' icon onClick={() => this.onPageClick(this.state.page + 1)}>
                                     <semantic.Icon name='chevron right' />
                                 </semantic.Menu.Item>
                             </semantic.Menu>
