@@ -1,6 +1,6 @@
 import {
     GET_OFFERS
-} from '../action/type';
+} from '../actions/types';
 
 const INITIAL_STATE = { 
     offerList: []

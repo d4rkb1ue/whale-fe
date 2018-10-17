@@ -1,9 +1,9 @@
 import {
     GET_OFFERS
-} from './type';
-import OfferAPI from '../api/get';
+} from './types';
+import data from '../api/get';
 
 export const getOffers = () => async dispatch => {
-    const response = await OfferAPI.getPostList();
+    const response = await data;
     await dispatch({ type: GET_OFFERS, payload: response });
 };

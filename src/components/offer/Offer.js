@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 const Offer = props => {
     return (
-        <semantic.Table.Row key={props.key}>
+        <semantic.Table.Row>
             <semantic.Table.Cell>{props.companyName}</semantic.Table.Cell>
             <semantic.Table.Cell>{props.base}</semantic.Table.Cell>
             <semantic.Table.Cell>{props.equity}</semantic.Table.Cell>

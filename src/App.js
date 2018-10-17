@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducer';
+import reducer from './reducers';
 import thunk from 'redux-thunk';
 import './App.css';
-import { OfferList } from './component/offer';
+import { OfferList } from './components/offer';
 
 class App extends Component {
 
