@@ -15,11 +15,7 @@ class OfferList extends Component {
         return offers.map((item, i) => 
             <Offer
                 key={i}
-                companyName={item.CompanyName}
-                base={item.BaseSalary}
-                equity={item.Equity}
-                signBonus={item.SignBonus}
-                yearlyBonus={item.YearlyBonus}
+                offer={item}
             />
         )
     }
