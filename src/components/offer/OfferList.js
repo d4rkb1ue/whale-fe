@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as semantic from 'semantic-ui-react';
+import { Table, Dropdown } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import Offer from './Offer';
 import { getOffers, getFilteredOffers } from '../../actions';
@@ -20,26 +20,35 @@ class OfferList extends Component {
         )
     }
 
+
     render() {
+    const filterOptions = [ 
+        { key: 'degree_bachelor', value: 'by_degree=bachelor', flag: 'af', text: 'bachelor degree' },
+        { key: 'degree_master', value: 'by_degree=master', flag: 'af', text: 'master degree' },
+        { key: 'degree_phd', value: 'by_degree=phd', flag: 'af', text: 'phd degree' } ];
         return (
             <div>
-                <semantic.Table>
-                    <semantic.Table.Header>
-                        <semantic.Table.Row>
-                            <semantic.Table.HeaderCell>CompanyName</semantic.Table.HeaderCell>
-                            <semantic.Table.HeaderCell>Base</semantic.Table.HeaderCell>
-                            <semantic.Table.HeaderCell>Equity</semantic.Table.HeaderCell>
-                            <semantic.Table.HeaderCell>SignBonus</semantic.Table.HeaderCell>
-                            <semantic.Table.HeaderCell>YearlyBonus</semantic.Table.HeaderCell>
-                        </semantic.Table.Row>
-                    </semantic.Table.Header>
-                    <semantic.Table.Body>
+                <Table>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>CompanyName</Table.HeaderCell>
+                            <Table.HeaderCell>Base</Table.HeaderCell>
+                            <Table.HeaderCell>Equity</Table.HeaderCell>
+                            <Table.HeaderCell>SignBonus</Table.HeaderCell>
+                            <Table.HeaderCell>YearlyBonus</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {this.createTable(this.props.offerList)}
-                    </semantic.Table.Body>
-                </semantic.Table>
-                <button onClick={() => this.props.getFilteredOffers("by_degree=master")}>
-                    filter by degree
-                </button>
+                    </Table.Body>
+                </Table>
+                <Dropdown 
+                    placeholder='Filter by ...' 
+                    fluid 
+                    search 
+                    selection 
+                    options={filterOptions} 
+                    onChange={(e, { value }) => {console.log(value); this.props.getFilteredOffers(value)}} />
             </div>
         );
     }
