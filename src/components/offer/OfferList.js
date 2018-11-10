@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as semantic from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Offer from './Offer';
-import { getOffers } from '../../actions';
+import { getOffers, getFilteredOffers } from '../../actions';
 
 class OfferList extends Component {
     constructor(props) {
@@ -22,20 +22,25 @@ class OfferList extends Component {
 
     render() {
         return (
-            <semantic.Table>
-                <semantic.Table.Header>
-                    <semantic.Table.Row>
-                        <semantic.Table.HeaderCell>CompanyName</semantic.Table.HeaderCell>
-                        <semantic.Table.HeaderCell>Base</semantic.Table.HeaderCell>
-                        <semantic.Table.HeaderCell>Equity</semantic.Table.HeaderCell>
-                        <semantic.Table.HeaderCell>SignBonus</semantic.Table.HeaderCell>
-                        <semantic.Table.HeaderCell>YearlyBonus</semantic.Table.HeaderCell>
-                    </semantic.Table.Row>
-                </semantic.Table.Header>
-                <semantic.Table.Body>
-                    {this.createTable(this.props.offerList)}
-                </semantic.Table.Body>
-            </semantic.Table>
+            <div>
+                <semantic.Table>
+                    <semantic.Table.Header>
+                        <semantic.Table.Row>
+                            <semantic.Table.HeaderCell>CompanyName</semantic.Table.HeaderCell>
+                            <semantic.Table.HeaderCell>Base</semantic.Table.HeaderCell>
+                            <semantic.Table.HeaderCell>Equity</semantic.Table.HeaderCell>
+                            <semantic.Table.HeaderCell>SignBonus</semantic.Table.HeaderCell>
+                            <semantic.Table.HeaderCell>YearlyBonus</semantic.Table.HeaderCell>
+                        </semantic.Table.Row>
+                    </semantic.Table.Header>
+                    <semantic.Table.Body>
+                        {this.createTable(this.props.offerList)}
+                    </semantic.Table.Body>
+                </semantic.Table>
+                <button onClick={() => this.props.getFilteredOffers("by_degree=master")}>
+                    filter by degree
+                </button>
+            </div>
         );
     }
 }
@@ -49,4 +54,5 @@ const mapStateToProps = ({ offer }) => {
 
 export default connect(mapStateToProps, {
     getOffers,
+    getFilteredOffers
 })(OfferList);
