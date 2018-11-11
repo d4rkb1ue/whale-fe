@@ -1,20 +1,20 @@
 import {
     GET_OFFERS
-} from '../actions/types';
+} from '../constants/ApiActions'
 
 const INITIAL_STATE = { 
-    offerList: []
-};
+    offers: []
+}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_OFFERS: {
             return {
                 ...state,
-                offerList: action.payload,
-            };
+                offers: action.offers,
+            }
         }
         default:
-            return state;
+            return state
     }
 }

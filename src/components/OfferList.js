@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import * as semantic from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
-import Offer from './Offer';
-import { getOffers } from '../../actions';
+import OfferItem from './OfferItem';
 
-class OfferList extends Component {
-    constructor(props) {
-        super(props);
-        this.props.getOffers();
-    }
-
+export default class OfferList extends Component {
     createTable(offers) {
         return offers.map((item, i) => 
-            <Offer
+            <OfferItem
                 key={i}
                 offer={item}
             />
@@ -21,6 +13,7 @@ class OfferList extends Component {
     }
 
     render() {
+        const { offers } = this.props
         return (
             <semantic.Table>
                 <semantic.Table.Header>
@@ -33,20 +26,9 @@ class OfferList extends Component {
                     </semantic.Table.Row>
                 </semantic.Table.Header>
                 <semantic.Table.Body>
-                    {this.createTable(this.props.offerList)}
+                    {this.createTable(offers)}
                 </semantic.Table.Body>
             </semantic.Table>
         );
     }
 }
-
-const mapStateToProps = ({ offer }) => {
-    return {
-        offerList: offer.offerList
-    };
-};
-
-
-export default connect(mapStateToProps, {
-    getOffers,
-})(OfferList);

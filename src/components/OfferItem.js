@@ -1,9 +1,7 @@
 import React from 'react';
 import * as semantic from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 
-const Offer = props => {
-    const offer = props.offer;
+export default ({ offer }) => {
     return (
         <semantic.Table.Row>
             <semantic.Table.Cell>{offer.company_name}</semantic.Table.Cell>
@@ -14,5 +12,3 @@ const Offer = props => {
         </semantic.Table.Row>
     );
 };
-
-export default Offer;

@@ -1,9 +1,11 @@
-import {
-    GET_OFFERS
-} from './types';
-import data from '../api/get';
+import * as ApiActions from '../constants/ApiActions';
 
-export const getOffers = () => async dispatch => {
-    const response = await data();
-    await dispatch({ type: GET_OFFERS, payload: response });
-};
+import { getDemoData } from '../api/get';
+
+export const getRecentOffers = () => async dispatch => {
+    const offers = await getDemoData();
+    dispatch({
+        type: ApiActions.GET_OFFERS,
+        offers
+    })
+}
