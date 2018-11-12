@@ -1,17 +1,33 @@
-import {
-    GET_OFFERS
-} from '../constants/ApiActions'
+import * as Action from '../constants/ApiActions'
 
 const INITIAL_STATE = { 
-    offers: []
+    offers: [],
+    loading: {
+        isLoading: false,
+        placeholderNum: 0,
+    },
 }
 
 export default (state = INITIAL_STATE, action) => {
-    switch (action.type) {
-        case GET_OFFERS: {
+    const { type } = action
+    switch (type) {
+        case Action.LOADING_OFFERS: {
+            return {
+                ...state,
+                loading: {
+                    isLoading: true,
+                    placeholderNum: action.placeholderNum
+                }
+            }
+        }
+        case Action.RECEIVE_OFFERS: {
             return {
                 ...state,
                 offers: action.offers,
+                loading: {
+                    isLoading: false,
+                    placeholderNum: 0
+                }
             }
         }
         default:

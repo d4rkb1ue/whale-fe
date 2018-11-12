@@ -83,13 +83,3 @@ export const getData = async (query) => {
     let data = res.data && res.data.offers
     return data || []
 }
-
-export const getDemoData = async () => {
-    let query = makeQuery({
-        ...EMPTY_QUERY,
-        limit: 10,
-    })
-    
-    return await getData(query)
-}
-

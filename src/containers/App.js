@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getRecentOffers } from '../actions'
+import { getDemoOffers } from '../actions'
 import OfferList from '../components/OfferList'
 
 class App extends Component {
     componentDidMount() {
         const { dispatch } = this.props
-        dispatch(getRecentOffers())
+        dispatch(getDemoOffers())
     }
-    
+
     render() {
-        const { offers } = this.props
+        const { offers, loading } = this.props
         return (
-            <OfferList offers={offers} />
+            <OfferList
+                offers={offers}
+                loading={loading}
+            />
         )
     }
 }
 
 const mapStateToProps = state => {
-    const { offers } = state
+    const { offers, loading } = state.offers
     return {
-        offers: offers.offers,
+        offers,
+        loading,
     }
 }
 
