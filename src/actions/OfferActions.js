@@ -1,9 +1,9 @@
 import * as ApiActions from '../constants/ApiActions';
 import { getData, makeQuery, EMPTY_QUERY } from '../api/get';
 
-export const loadingOffers = (placeholderNum) => ({
+export const loadingOffers = (taskCount) => ({
     type: ApiActions.LOADING_OFFERS,
-    placeholderNum
+    taskCount
 })
 
 export const receiveOffers = offers => ({
@@ -11,8 +11,8 @@ export const receiveOffers = offers => ({
     offers
 })
 
-const requestOffers = (query = '', placeholderNum = 10) => async (dispatch) => {
-    dispatch(loadingOffers(placeholderNum))
+const requestOffers = (query = '', taskCount = 10) => async (dispatch) => {
+    dispatch(loadingOffers(taskCount))
     const offers = await getData(query)
     dispatch({
         type: ApiActions.RECEIVE_OFFERS,
@@ -20,7 +20,7 @@ const requestOffers = (query = '', placeholderNum = 10) => async (dispatch) => {
     })
 }
 
-const DEMO_OFFER_COUNT = 10
+const DEMO_OFFER_COUNT = 3000
 export const getDemoOffers = () => dispatch => {
     return dispatch(requestOffers(makeQuery({
         ...EMPTY_QUERY,
