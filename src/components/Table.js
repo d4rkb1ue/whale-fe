@@ -19,16 +19,27 @@ export default class Table extends Component {
                 className='full-width'
                 icon='world'
                 size='mini'
-                onClick={() => window.open(url, '_blank') } />
-            )
+                onClick={() => window.open(url, '_blank')} />
+        )
         this.renderCustomCell(headers, 'url', 'Cell', u => urlBotton(u.value))
         this.renderCustomCell(headers, 'url', 'maxWidth', 50)
+        const filter = (filter, row) => {
+            const accessor = filter.id
+            if (!row[accessor]) {
+                return false
+            }
+            const value = filter.value.toLowerCase()
+            return String(row[accessor]).toLowerCase().indexOf(value) > -1
+        }
         return (
             <ReactTable
                 data={offers}
                 columns={headers}
                 loading={loading.isLoading}
                 defaultPageSize={20}
+                showPageSizeOptions={false}
+                filterable={true}
+                defaultFilterMethod={filter}
                 className="-striped -highlight"
             />
         )
