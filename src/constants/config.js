@@ -21,5 +21,33 @@ export const OFFER_HEADER = [
         Header: 'YearlyBonus',
         accessor: 'yearly_bonus',
     },
+    {
+        Header: 'Degree',
+        accessor: 'degree',
+    },
+    {
+        Header: 'Area',
+        accessor: 'area',
+    },
+    {
+        Header: 'Experience',
+        accessor: 'experience_level',
+    },
+    // {
+    //     Header: 'experience',
+    //     accessor: 'experience',
+    // },
+    {
+        Header: 'post_time',
+        accessor: 'post_time',
+    },
+    {
+        Header: 'season mo.',
+        accessor: 'season',
+    },
+    {
+        Header: 'Link',
+        accessor: 'url',
+    },
 ]
 

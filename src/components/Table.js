@@ -1,11 +1,28 @@
 import React, { Component } from 'react'
 import ReactTable from "react-table"
+import { Button } from 'semantic-ui-react'
 import "react-table/react-table.css"
 
 export default class Table extends Component {
+    // use arrow function to avoid scope problem without useing .bind()
+    renderCustomCell = (headers, accessor, key, value) => {
+        headers.forEach(h => {
+            if (h.accessor === accessor) {
+                h[key] = value
+            }
+        })
+    }
     render() {
         const { offers, headers, loading } = this.props
-        console.log(loading)
+        const urlBotton = url => (
+            <Button
+                className='full-width'
+                icon='world'
+                size='mini'
+                onClick={() => window.open(url, '_blank') } />
+            )
+        this.renderCustomCell(headers, 'url', 'Cell', u => urlBotton(u.value))
+        this.renderCustomCell(headers, 'url', 'maxWidth', 50)
         return (
             <ReactTable
                 data={offers}
