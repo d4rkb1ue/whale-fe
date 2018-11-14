@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactTable from "react-table"
 import { Button, Dropdown } from 'semantic-ui-react'
 import "react-table/react-table.css"
-import { OFFER_HEADER_CHOICES } from '../constants/config'
+import { OFFER_HEADER_CHOICES, DEFAULT_OFFER_PAGESIZE } from '../constants/config'
 
 export default class Table extends Component {
     // use arrow function to avoid scope problem without useing .bind()
@@ -98,7 +98,7 @@ export default class Table extends Component {
                 data={offers}
                 columns={headers}
                 loading={loading.isLoading}
-                defaultPageSize={20}
+                defaultPageSize={DEFAULT_OFFER_PAGESIZE}
                 showPageSizeOptions={false}
                 filterable={true}
                 defaultFilterMethod={defaultFilter}

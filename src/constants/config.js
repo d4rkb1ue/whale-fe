@@ -1,5 +1,6 @@
 export const API = 'http://whaleapi.drkbl.com/api/v1/'
 export const OFFER_API = API + '/offers'
+export const DEFAULT_OFFER_PAGESIZE = 20
 export const OFFER_HEADER_CHOICES = {
     'season': [
         { key: '1-3', value: '1-3', text: 'Spring' },
