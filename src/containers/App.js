@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getDemoOffers } from '../actions'
 import Table from '../components/Table'
 import { OFFER_HEADER } from '../constants/config'
+import { Container } from 'semantic-ui-react'
 
 class App extends Component {
     componentDidMount() {
@@ -13,11 +14,13 @@ class App extends Component {
     render() {
         const { offers, loading } = this.props
         return (
-            <Table
-                offers={offers}
-                headers={OFFER_HEADER}
-                loading={loading}
-            />
+            <Container fluid>
+                <Table
+                    offers={offers}
+                    headers={OFFER_HEADER}
+                    loading={loading}
+                />
+            </Container>
         )
     }
 }

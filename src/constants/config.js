@@ -1,5 +1,13 @@
 export const API = 'http://whaleapi.drkbl.com/api/v1/'
 export const OFFER_API = API + '/offers'
+export const OFFER_HEADER_CHOICES = {
+    'season': [
+        { key: '1-3', value: '1-3', text: 'Spring' },
+        { key: '4-6', value: '4-6', text: 'Summer' },
+        { key: '7-9', value: '7-9', text: 'Fall' },
+        { key: '10-12', value: '10-12', text: 'Winter' },
+    ]
+}
 export const OFFER_HEADER = [
     {
         Header: 'CompanyName',
@@ -50,4 +58,5 @@ export const OFFER_HEADER = [
         accessor: 'url',
     },
 ]
+
 
