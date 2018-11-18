@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     offers: [],
     loading: {
         isLoading: false,
-        placeholderNum: 0,
+        taskCount: 0,
     },
 }
 
@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: {
                     isLoading: true,
-                    placeholderNum: action.placeholderNum
+                    taskCount: action.taskCount
                 }
             }
         }
@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
                 offers: action.offers,
                 loading: {
                     isLoading: false,
-                    placeholderNum: 0
+                    taskCount: 0
                 }
             }
         }
