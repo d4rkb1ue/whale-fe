@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getDemoOffers } from '../actions'
 import Table from '../components/Table'
+import Chart from '../components/Chart'
 import { OFFER_HEADER } from '../constants/config'
-import { Container } from 'semantic-ui-react'
+import { Container, Divider, Header } from 'semantic-ui-react'
 
 class App extends Component {
     componentDidMount() {
@@ -14,7 +15,16 @@ class App extends Component {
     render() {
         const { offers, loading } = this.props
         return (
-            <Container fluid>
+            <Container>
+            <Header as='h1'>
+                Statistics
+            </Header>
+            <Chart 
+                offers={offers}
+            />
+            <Header as='h1'>
+                List
+            </Header>
                 <Table
                     offers={offers}
                     headers={OFFER_HEADER}

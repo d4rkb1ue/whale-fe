@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactTable from "react-table"
-import { Button, Dropdown } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import "react-table/react-table.css"
 import { OFFER_HEADER_CHOICES, DEFAULT_OFFER_PAGESIZE } from '../constants/config'
 

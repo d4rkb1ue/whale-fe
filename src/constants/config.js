@@ -11,7 +11,7 @@ export const OFFER_HEADER_CHOICES = {
 }
 export const OFFER_HEADER = [
     {
-        Header: 'CompanyName',
+        Header: 'Company',
         accessor: 'company_name',
     },
     {
@@ -46,18 +46,22 @@ export const OFFER_HEADER = [
     //     Header: 'experience',
     //     accessor: 'experience',
     // },
+    // {
+    //     Header: 'post_time',
+    //     accessor: 'post_time',
+    // },
     {
-        Header: 'post_time',
-        accessor: 'post_time',
+        Header: 'Year',
+        accessor: 'year',
     },
     {
-        Header: 'season mo.',
+        Header: 'Season',
         accessor: 'season',
     },
     {
         Header: 'Link',
         accessor: 'url',
-    },
+    },    
 ]
 
 
