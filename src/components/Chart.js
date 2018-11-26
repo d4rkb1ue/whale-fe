@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Line, Pie, defaults } from 'react-chartjs-2'
-import { GridColumn, Card } from 'semantic-ui-react'
-import { getOfferCountByYear, getOfferCountByCompany } from "../calculators";
+import { getOfferCountByYear, getOfferCountByCompany } from "../utils";
 import ChartCard from './ChartCard'
 
 defaults.global.legend.display = false

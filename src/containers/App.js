@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getDemoOffers } from '../actions'
+import { getDemoOffers } from '../actions/ApiActions'
+
 import Table from '../components/Table'
 import Chart from '../components/Chart'
-import { OFFER_HEADER } from '../constants/config'
-import { Container, Divider, Header } from 'semantic-ui-react'
+import { Container, Divider } from 'semantic-ui-react'
 
 class App extends Component {
     componentDidMount() {
@@ -16,31 +16,28 @@ class App extends Component {
         const { offers, loading } = this.props
         return (
             <Container>
-            <Header as='h1'>
-                Statistics
-            </Header>
-            <Chart 
-                offers={offers}
-            />
-            <Header as='h1'>
-                List
-            </Header>
-                <Table
-                    offers={offers}
-                    headers={OFFER_HEADER}
-                    loading={loading}
-                />
+                <Divider hidden />
+                <Chart offers={offers} />
+                <Divider hidden />
+                <Table offers={offers} loading={loading} />
             </Container>
         )
     }
 }
 
+const getFilteredOffers = (offers, filters) => {
+    // TODO
+    return offers.filter(offer => offer.company_name === 'Google')
+}
+
 const mapStateToProps = state => {
-    const { offers, loading } = state.offers
+    const { offers, filters } = state
     return {
-        offers,
-        loading,
+        offers: getFilteredOffers(offers.offers, filters),
+        loading: offers.loading
     }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(
+    mapStateToProps,
+)(App)
