@@ -1,3 +1,4 @@
+import { SHOW_YEAR_BEFORE, SHOW_YEAR_LATER } from '../constants/config'
 function offerCountBy (offers, para, sortFunc) {
     let counter = {}
     offers.forEach(o => {
@@ -21,8 +22,23 @@ function offerCountBy (offers, para, sortFunc) {
         counts: arr.map(obj => obj.count)
     }
 }
+
+const THIS_YEAR = (new Date()).getFullYear()
+const START_YEAR = THIS_YEAR - SHOW_YEAR_BEFORE
+const END_YEAR = THIS_YEAR + SHOW_YEAR_LATER
+
 export function getOfferCountByYear(offers) {
-    return offerCountBy(offers, 'year', (a, b) => a.year - b.year)
+    let res = offerCountBy(offers, 'year', (a, b) => a.year - b.year)
+    // show only recent years
+    let recent = {}
+    for (let i = START_YEAR; i <= END_YEAR; i++) {
+        recent[i] = true
+    }
+    res = {
+        labels: res.labels.filter(l => recent[l]),
+        counts: res.counts.filter((_, idx) => recent[res.labels[idx]])
+    }
+    return res
 }
 
 export function getOfferCountByCompany(offers) {

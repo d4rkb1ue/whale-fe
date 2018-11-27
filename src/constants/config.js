@@ -9,6 +9,8 @@ export const OFFER_HEADER_CHOICES = {
         { key: '10-12', value: '10-12', text: 'Winter' },
     ]
 }
+export const SHOW_YEAR_BEFORE = 3
+export const SHOW_YEAR_LATER = 1
 export const OFFER_HEADER = [
     {
         Header: 'Company',
