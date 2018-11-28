@@ -105,10 +105,10 @@ export default class Charts extends Component {
         // make offer by company Pie chart
         ({ labels, counts } = getOfferCountByCompany(offers));
         onClick = this.makeElementListener('company_name')
-        chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick} options={{legend: { display: true }}} />
+        chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick} />
         charts.push({
             color: 'blue',
-            header: 'Offer by Companies',
+            header: 'by Companies',
             chart,
         });
 
@@ -119,7 +119,7 @@ export default class Charts extends Component {
         chart = <Bar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'red',
-            header: 'Offer by Year',
+            header: 'by Year',
             chart,
         });
 
@@ -129,7 +129,7 @@ export default class Charts extends Component {
         chart = <Polar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} options={{legend: { display: true }}} />
         charts.push({
             color: 'yellow',
-            header: 'Offer by Degree',
+            header: 'by Degree',
             chart,
         });
 
@@ -139,7 +139,7 @@ export default class Charts extends Component {
         chart = <Line data={this.makeLineDate(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'orange',
-            header: 'Offer by Season',
+            header: 'by Season',
             chart,
         });
 
@@ -149,7 +149,7 @@ export default class Charts extends Component {
         chart = <HorizontalBar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'purple',
-            header: 'Offer by Experience',
+            header: 'by Experience',
             chart,
         });
 
@@ -159,7 +159,7 @@ export default class Charts extends Component {
         chart = <Line data={this.makeLineDate(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'green',
-            header: 'Offer by Salary',
+            header: 'by Salary',
             chart,
         });
 
