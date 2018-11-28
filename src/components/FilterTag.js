@@ -23,6 +23,35 @@ const SHOW_LABEL = {
 export default class FilterTag extends Component {
     render() {
         const { accessor, value, onClick } = this.props
+        if (accessor === 'season') {
+            let season = '';
+            switch (value) {
+                case '4-6':
+                    season = 'Spring';
+                    break;
+                case '7-9':
+                    season = 'Summer';
+                    break;
+                case '10-12':
+                    season = 'Fall';
+                    break;
+                case '1-3':
+                    season = 'Winter';
+                    break;
+                default:
+                    break;
+            }
+            return (
+                <Label>
+                    <Icon name='delete' onClick={onClick} />
+                    <Label.Detail>
+                        <Icon name={ICON[accessor] || 'circle outline'} />
+                        {SHOW_LABEL[accessor] && SHOW_LABEL[accessor] + '='}
+                        {season}
+                    </Label.Detail>
+                </Label>
+            )
+        }
         return (
             <Label>
                 <Icon name='delete' onClick={onClick} />

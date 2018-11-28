@@ -23,7 +23,6 @@ export default class Charts extends Component {
             // only take first element
             e = e[0]
             if (accessor === 'season') {
-                console.log(e);
                 if (e._model.label === 'Spring' ) { e._model.label = '4-6'}
                 else if (e._model.label === 'Summer' ) { e._model.label = '7-9'}
                 else if (e._model.label === 'Fall' ) { e._model.label = '10-12'}
