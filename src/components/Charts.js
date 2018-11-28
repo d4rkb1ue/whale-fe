@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { defaults, Bar, Pie, Line, Polar, HorizontalBar } from 'react-chartjs-2'
+import { defaults, Bar, Pie, Line, Polar, HorizontalBar, Bubble } from 'react-chartjs-2'
 import { 
     getOfferCountByYear, 
     getOfferCountByCompany, 
@@ -60,6 +60,34 @@ export default class Charts extends Component {
         }]
     })
 
+    makeBubbleData = (labels, datas) => ({
+        labels: ['January', 'ad'],
+        datasets: [{
+            label:[ 'My First dataset', 'sadf'],
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [
+                {x:'amazon',y:20,r:5},
+                {x:'google',y:40,r:5}
+            ]
+        }]
+    })
+
     makeElementListener = accessor => {
         const { addFilter } = this.props
         if (accessor === 'season') {
@@ -100,7 +128,7 @@ export default class Charts extends Component {
     render() {
         const { offers } = this.props
         const charts = []
-        let labels, counts, chart, onClick;
+        let labels, counts, companyNames, chart, onClick;
 
         // make offer by company Pie chart
         ({ labels, counts } = getOfferCountByCompany(offers));
@@ -154,9 +182,9 @@ export default class Charts extends Component {
         });
 
         // make offer by salary Line chart
-        ({ labels, counts } = getOfferCountBySalary(offers));
+        ({ labels, counts, companyNames } = getOfferCountBySalary(offers));
         onClick = this.makeElementListener('base_salary')
-        chart = <Line data={this.makeLineDate(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Bubble data={this.makeBubbleData(labels, [counts, companyNames])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'green',
             header: 'Offer by Salary',

@@ -17,11 +17,46 @@ function offerCountBy (offers, para, sortFunc) {
     if (sortFunc) {
         arr.sort(sortFunc)
     }
+    console.log(arr)
+
     return {
         labels: arr.map(obj => obj[para]),
         counts: arr.map(obj => obj.count)
     }
 }
+
+// Company name is unique
+function offerCountByWithCompanyName (offers, para, sortFunc) {
+    let counter = {} // Map<company_name, Map<salary, count>>
+    offers.forEach(o => {
+        let c = o['company_name']
+        let p = o[para]
+        if(!p) { return }
+        counter[c] = counter[c] || {}
+        counter[c][p] = counter[c][p] || 0
+        counter[c][p]++
+    })
+    let arr = []
+    for (const company in counter) {
+        for (const salary in counter[company]) {
+            arr.push({
+                company_name: company,
+                [para]: salary,
+                count: counter[company][salary]
+            })
+        }
+    }
+    console.log(arr)
+    if (sortFunc) {
+        arr.sort(sortFunc)
+    }
+    return {
+        companyNames: arr.map(obj => obj['company_name']),
+        labels: arr.map(obj => obj[para]),
+        counts: arr.map(obj => obj.count)
+    }
+}
+
 
 const THIS_YEAR = (new Date()).getFullYear()
 const START_YEAR = THIS_YEAR - SHOW_YEAR_BEFORE
@@ -95,5 +130,5 @@ export function getOfferCountByExperience(offers) {
 }
 
 export function getOfferCountBySalary(offers) {
-    return offerCountBy(offers, 'base_salary', (a, b) => a.base_salary - b.base_salary)
+    return offerCountByWithCompanyName(offers, 'base_salary', (a, b) => b.company_name - a.company_name) // alphabetical order on company name 
 }
