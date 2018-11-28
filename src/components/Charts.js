@@ -19,18 +19,26 @@ export default class Charts extends Component {
 
     makeElementListener = accessor => {
         const { addFilter } = this.props
+        if (accessor === 'season') {
+            return (e) => {
+                e = e[0]
+                if (!e || !e._index) {
+                    console.error('chart on click', e)
+                    return
+                }
+                if (e._index === 0) { e._model.label = '4-6' }
+                else if (e._index === 1) { e._model.label = '7-9' }
+                else if (e._index === 2) { e._model.label = '10-12' }
+                else if (e._index === 3) { e._model.label = '1-3' }
+                addFilter(accessor, e._model.label)
+            }
+        }
         return (e) => {
             // only take first element
             e = e[0]
             if (!e || !e._model || !e._model.label) {
                 console.error('chart on click', e)
                 return
-            }
-            if (accessor === 'season') {
-                if (e._model.label === 'Spring' ) { e._model.label = '4-6'}
-                else if (e._model.label === 'Summer' ) { e._model.label = '7-9'}
-                else if (e._model.label === 'Fall' ) { e._model.label = '10-12'}
-                else if (e._model.label === 'Winter' ) { e._model.label = '1-3'}
             }
             addFilter(accessor, e._model.label)
         }
@@ -85,7 +93,7 @@ export default class Charts extends Component {
         // make offer by season Line chart
         ({ labels, counts } = getOfferCountBySeason(offers));
         onClick = this.makeElementListener('season')
-        chart = <Bar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'green',
             header: 'Offer by Season',
