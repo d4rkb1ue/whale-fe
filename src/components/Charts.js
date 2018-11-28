@@ -66,7 +66,7 @@ export default class Charts extends Component {
             chart,
         });
 
-        // make offer by experience  chart
+        // make offer by experience chart
         ({ labels, counts } = getOfferCountByExperience(offers));
         onClick = this.makeElementListener('experience_level')
         chart = <HorizontalBar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />

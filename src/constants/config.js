@@ -3,10 +3,10 @@ export const OFFER_API = API + '/offers'
 export const DEFAULT_OFFER_PAGESIZE = 20
 export const OFFER_HEADER_CHOICES = {
     'season': [
-        { key: '1-3', value: '1-3', text: 'Spring' },
-        { key: '4-6', value: '4-6', text: 'Summer' },
-        { key: '7-9', value: '7-9', text: 'Fall' },
-        { key: '10-12', value: '10-12', text: 'Winter' },
+        { key: '1-3', value: '1-3', text: 'Winter' },
+        { key: '4-6', value: '4-6', text: 'Spring' },
+        { key: '7-9', value: '7-9', text: 'Summer' },
+        { key: '10-12', value: '10-12', text: 'Fall' },
     ]
 }
 export const SHOW_YEAR_BEFORE = 3
