@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Bar, Pie, defaults } from 'react-chartjs-2'
+import { Bar, Pie, Doughnut, defaults } from 'react-chartjs-2'
 import { getOfferCountByYear, getOfferCountByCompany, getOfferCountByDegree } from "../utils";
 import Chart from './Chart'
 
@@ -54,9 +54,9 @@ export default class Charts extends Component {
         // make offer by degree Line chart
         ({ labels, counts } = getOfferCountByDegree(offers));
         onClick = this.makeElementListener('degree')
-        chart = <Bar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Doughnut data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
-            color: 'red',
+            color: 'yellow',
             header: 'Offer by Degree',
             chart,
         });
