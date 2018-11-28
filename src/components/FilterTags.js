@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilterTag from './FilterTag'
-import { Icon, Label } from 'semantic-ui-react'
+import { Label } from 'semantic-ui-react'
 
 export default class FilterTags extends Component {
     render() {
