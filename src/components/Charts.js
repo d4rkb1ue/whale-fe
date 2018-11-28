@@ -13,9 +13,50 @@ defaults.global.legend.display = false
 // defaults.global.redraw = true
 
 export default class Charts extends Component {
+    
+    // chartjs2 does not support automatically assigning different colors to different portions of the chart.
+    // this function is for dynamically generating different colors for different portions on the chart.
+    _dynamicColors = (n) => {
+        let colors = [];
+        for (let i = 0; i < n; i++) {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            colors.push("rgb(" + r + "," + g + "," + b + ")");
+        }
+        return colors;
+    };
+
     makeData = (labels, datas) => ({
         labels,
-        datasets: datas.map(data => ({ data }))
+        datasets: [{
+            data: datas[0],
+            backgroundColor: this._dynamicColors(datas[0].length),
+            hoverBackgroundColor: this._dynamicColors(datas[0].length),
+        }]
+    })
+
+    makeLineDate = (labels, datas) => ({
+        labels,
+        datasets: [{
+            data: datas[0],
+            lineTension: 0.1,
+            backgroundColor: 'rgba(75,192,192,0.4)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: 'rgba(75,192,192,1)',
+            pointBackgroundColor: '#fff',
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+            pointHoverBorderColor: 'rgba(220,220,220,1)',
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+        }]
     })
 
     makeElementListener = accessor => {
@@ -63,6 +104,7 @@ export default class Charts extends Component {
         // make offer by company Pie chart
         ({ labels, counts } = getOfferCountByCompany(offers));
         onClick = this.makeElementListener('company_name')
+        console.log(labels)
         chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick}/>
         charts.push({
             color: 'blue',
@@ -91,6 +133,16 @@ export default class Charts extends Component {
             chart,
         });
 
+        // make offer by season Line chart
+        ({ labels, counts } = getOfferCountBySeason(offers));
+        onClick = this.makeElementListener('season')
+        chart = <Line data={this.makeLineDate(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        charts.push({
+            color: 'orange',
+            header: 'Offer by Season',
+            chart,
+        });
+
         // make offer by experience chart
         ({ labels, counts } = getOfferCountByExperience(offers));
         onClick = this.makeElementListener('experience_level')
@@ -101,20 +153,10 @@ export default class Charts extends Component {
             chart,
         });
 
-        // make offer by season Line chart
-        ({ labels, counts } = getOfferCountBySeason(offers));
-        onClick = this.makeElementListener('season')
-        chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
-        charts.push({
-            color: 'orange',
-            header: 'Offer by Season',
-            chart,
-        });
-
         // make offer by salary Line chart
         ({ labels, counts } = getOfferCountBySalary(offers));
         onClick = this.makeElementListener('base_salary')
-        chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Line data={this.makeLineDate(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'green',
             header: 'Offer by Salary',
