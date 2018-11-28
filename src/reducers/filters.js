@@ -1,7 +1,8 @@
 import { ADD_FILTER, REMOVE_FILTER } from '../actions/FilterActions'
 import Filter from '../dataStructure/Filter'
-// TODO
-const INITIAL_STATE = [ new Filter('company_name', 'Google') ]
+
+// const INITIAL_STATE = [ new Filter('company_name', 'Google') ]
+const INITIAL_STATE = []
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {

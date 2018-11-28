@@ -6,7 +6,8 @@ import Charts from '../components/Charts'
 import FilterTags from '../components/FilterTags'
 import SearchBar from '../components/SearchBar'
 import { Container, Divider } from 'semantic-ui-react'
-import { removeFilter } from '../actions/FilterActions';
+import { addFilter, removeFilter } from '../actions/FilterActions'
+import Filter from '../dataStructure/Filter'
 
 class App extends Component {
     componentDidMount() {
@@ -15,7 +16,7 @@ class App extends Component {
     }
 
     render() {
-        const { offers, loading, filters, deleteFilter } = this.props
+        const { offers, loading, filters, addFilter, deleteFilter } = this.props
         return (
             <Container>
                 <Divider hidden />
@@ -23,7 +24,7 @@ class App extends Component {
                 <Divider hidden />
                 <FilterTags filters={filters} deleteFilter={deleteFilter} />
                 <Divider hidden />
-                <Charts offers={offers} />
+                <Charts offers={offers} addFilter={addFilter} />
                 <Divider hidden />
                 <Table offers={offers} loading={loading} />
             </Container>
@@ -56,6 +57,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     deleteFilter: id => dispatch(removeFilter(id)),
     getAllOffers: () => dispatch(getDemoOffers()),
+    addFilter: (accessor, value) => dispatch(addFilter(new Filter(accessor, value))),
 })
 
 export default connect(

@@ -36,6 +36,30 @@ export const OFFER_HEADER = [
         Header: 'Degree',
         accessor: 'degree',
     },
+    /**
+     *  BayArea
+     *  Greater Seattle Area
+     *  Greater New York Area
+     *  Greater Boston Area
+     *  Texas
+     *  Southern California
+     *  Pittsburgh
+     *  Chicago
+     *  DC
+     *  美国其他地区
+     *  Canada
+     *  欧洲
+     *  澳大利亚
+     *  北京
+     *  上海
+     *  广州
+     *  成都
+     *  沈阳
+     *  国内其他地区
+     *  亚洲其他地区
+     *  South America
+     *  Everywhere else
+     */
     {
         Header: 'Area',
         accessor: 'area',
@@ -63,7 +87,7 @@ export const OFFER_HEADER = [
     {
         Header: 'Link',
         accessor: 'url',
-    },    
+    },
 ]
 
 

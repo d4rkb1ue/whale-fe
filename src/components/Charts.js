@@ -11,14 +11,29 @@ export default class Charts extends Component {
         labels,
         datasets: datas.map(data => ({ data }))
     })
+    
+    makeElementListener = accessor => {
+        const { addFilter } = this.props
+        return (e) => {
+            // only take first element
+            e = e[0]
+            if (!e || !e._model || !e._model.label) {
+                console.error('chart on click', e)
+                return
+            }
+            addFilter(accessor, e._model.label)
+        }
+    }
+
     render() {
         const { offers } = this.props
         const charts = []
-        let labels, counts, chart;
+        let labels, counts, chart, onClick;
 
         // make offer by company Pie chart
         ({ labels, counts } = getOfferCountByCompany(offers));
-        chart = <Pie data={this.makeData(labels, [counts])} />
+        onClick = this.makeElementListener('company_name')
+        chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick}/>
         charts.push({
             color: 'blue',
             header: 'Offer by Companies',
