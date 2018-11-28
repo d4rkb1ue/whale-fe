@@ -1,5 +1,4 @@
 import { ADD_FILTER, REMOVE_FILTER } from '../actions/FilterActions'
-import Filter from '../dataStructure/Filter'
 
 // const INITIAL_STATE = [ new Filter('company_name', 'Google') ]
 const INITIAL_STATE = []

@@ -5,6 +5,7 @@ import Table from '../components/Table'
 import Charts from '../components/Charts'
 import FilterTags from '../components/FilterTags'
 import SearchBar from '../components/SearchBar'
+import Statistics from '../components/Statistics'
 import { Container, Divider } from 'semantic-ui-react'
 import { addFilter, removeFilter } from '../actions/FilterActions'
 import Filter from '../dataStructure/Filter'
@@ -23,6 +24,8 @@ class App extends Component {
                 <SearchBar />
                 <Divider hidden />
                 <FilterTags filters={filters} deleteFilter={deleteFilter} />
+                <Divider hidden />
+                <Statistics offers={offers} />
                 <Divider hidden />
                 <Charts offers={offers} addFilter={addFilter} />
                 <Divider hidden />

@@ -27,6 +27,15 @@ const THIS_YEAR = (new Date()).getFullYear()
 const START_YEAR = THIS_YEAR - SHOW_YEAR_BEFORE
 const END_YEAR = THIS_YEAR + SHOW_YEAR_LATER
 
+export function getAvg(offers) {
+    const ret = offers.reduce((sum, cur) => (cur['base_salary'] || 0) + sum, 0) / offers.length;
+    return ret || 0
+}
+
+export function randomURI() {
+    return Math.random().toString(36).substr(2);
+}
+
 export function getOfferCountByYear(offers) {
     let res = offerCountBy(offers, 'year', (a, b) => a.year - b.year)
     // show only recent years
