@@ -36,6 +36,7 @@ export default class Charts extends Component {
         }]
     })
 
+    // <Line /> does not require array of colors.
     makeLineDate = (labels, datas) => ({
         labels,
         datasets: [{
@@ -104,8 +105,7 @@ export default class Charts extends Component {
         // make offer by company Pie chart
         ({ labels, counts } = getOfferCountByCompany(offers));
         onClick = this.makeElementListener('company_name')
-        console.log(labels)
-        chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick}/>
+        chart = <Pie data={this.makeData(labels, [counts])} onElementsClick={onClick} options={{legend: { display: true }}} />
         charts.push({
             color: 'blue',
             header: 'Offer by Companies',
@@ -126,7 +126,7 @@ export default class Charts extends Component {
         // make offer by degree Donut chart
         ({ labels, counts } = getOfferCountByDegree(offers));
         onClick = this.makeElementListener('degree')
-        chart = <Polar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Polar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} options={{legend: { display: true }}} />
         charts.push({
             color: 'yellow',
             header: 'Offer by Degree',
