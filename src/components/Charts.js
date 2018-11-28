@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Bar, Pie, defaults } from 'react-chartjs-2'
-import { getOfferCountByYear, getOfferCountByCompany } from "../utils";
+import { getOfferCountByYear, getOfferCountByCompany, getOfferCountByDegree } from "../utils";
 import Chart from './Chart'
 
 defaults.global.legend.display = false
@@ -48,6 +48,16 @@ export default class Charts extends Component {
         charts.push({
             color: 'red',
             header: 'Offer by Year',
+            chart,
+        });
+
+        // make offer by degree Line chart
+        ({ labels, counts } = getOfferCountByDegree(offers));
+        onClick = this.makeElementListener('degree')
+        chart = <Bar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        charts.push({
+            color: 'red',
+            header: 'Offer by Degree',
             chart,
         });
 
