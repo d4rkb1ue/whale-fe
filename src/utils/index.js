@@ -67,10 +67,10 @@ export function getOfferCountBySeason(offers) {
         return res && res.text
     }
     const SEASON_ORDINAL = {
-        "1-3": 0,
-        "4-6": 1,
-        "7-9": 2,
-        "10-12": 3
+        "1-3": 3,
+        "4-6": 0,
+        "7-9": 1,
+        "10-12": 2
     }
     let res = offerCountBy(offers, 'season', (a, b) => SEASON_ORDINAL[a.season] - SEASON_ORDINAL[b.season])
     for (let i = 0; i < res.labels.length; i++) {
