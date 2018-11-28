@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import FilterTag from './FilterTag'
+import { Icon, Label } from 'semantic-ui-react'
 
 export default class FilterTags extends Component {
     render() {
         const { filters, deleteFilter } = this.props
-        return (
+        return filters.length ? (
             <div>
                 {filters.map((filter, idx) => 
                     <FilterTag 
@@ -14,6 +15,6 @@ export default class FilterTags extends Component {
                     />
                 )}
             </div>
-        )
+        ) : <Label icon='circle' content='all' />
     }
 }
