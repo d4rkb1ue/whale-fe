@@ -6,8 +6,8 @@ export default class SearchBar extends Component {
         return (
             <Menu>
                 <Menu.Item>
-                    {/* TODO Search with dynamic selection company */}
-                    <Input icon='search' placeholder='Company' />
+                    {/* TODO Search with dynamic selection company and area */}
+                    <Input icon='search' placeholder='Company or Area' />
                 </Menu.Item>
             </Menu>
 
