@@ -40,7 +40,7 @@ const getFilteredOffers = (offers, filters) => {
     filters.forEach(f => {
         const { value, accessor } = f
         filterGroup[accessor] = filterGroup[accessor] || {}
-        filterGroup[accessor][String(value).toLocaleLowerCase()] = 1
+        filterGroup[accessor][value] = 1
     })
     
     return offers.filter(offer => {

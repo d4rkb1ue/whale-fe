@@ -23,7 +23,7 @@ export default class Table extends Component {
                 size='mini'
                 onClick={() => window.open(url, '_blank')} />
         )
-        const URL_BUTTON_WIDTH = 50
+        const URL_BUTTON_WIDTH = 40
         this.renderCustomCell('url', {
             Cell: u => urlBotton(u.value),
             maxWidth: URL_BUTTON_WIDTH
