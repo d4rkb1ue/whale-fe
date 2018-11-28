@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import { Bar, Pie, Doughnut, defaults } from 'react-chartjs-2'
-import { getOfferCountByYear, getOfferCountByCompany, getOfferCountByDegree } from "../utils";
+import { defaults, Bar, Pie, Line, Polar, HorizontalBar } from 'react-chartjs-2'
+import { 
+    getOfferCountByYear, 
+    getOfferCountByCompany, 
+    getOfferCountByDegree,
+    getOfferCountBySeason,
+    getOfferCountByExperience } from "../utils";
 import Chart from './Chart'
 
 defaults.global.legend.display = false
@@ -40,7 +45,7 @@ export default class Charts extends Component {
             chart,
         });
 
-        // make offer by year Line chart
+        // make offer by year Bar chart
         ({ labels, counts } = getOfferCountByYear(offers));
         onClick = this.makeElementListener('year')
         // redraw is necessary for <Line /> to animate once loaded
@@ -51,13 +56,33 @@ export default class Charts extends Component {
             chart,
         });
 
-        // make offer by degree Line chart
+        // make offer by degree Donut chart
         ({ labels, counts } = getOfferCountByDegree(offers));
         onClick = this.makeElementListener('degree')
-        chart = <Doughnut data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        chart = <Polar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'yellow',
             header: 'Offer by Degree',
+            chart,
+        });
+
+        // make offer by experience  chart
+        ({ labels, counts } = getOfferCountByExperience(offers));
+        onClick = this.makeElementListener('experience_level')
+        chart = <HorizontalBar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        charts.push({
+            color: 'purple',
+            header: 'Offer by Experience',
+            chart,
+        });
+
+        // make offer by season Line chart
+        ({ labels, counts } = getOfferCountBySeason(offers));
+        onClick = this.makeElementListener('season')
+        chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        charts.push({
+            color: 'green',
+            header: 'Offer by Season',
             chart,
         });
 
