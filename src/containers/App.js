@@ -36,11 +36,19 @@ class App extends Component {
 }
 
 const getFilteredOffers = (offers, filters) => {
-    // TODO: search with mulitiple filters/values
+    let filterGroup = {}
+    filters.forEach(f => {
+        const { value, accessor } = f
+        filterGroup[accessor] = filterGroup[accessor] || {}
+        filterGroup[accessor][value] = 1
+    })
+    
     return offers.filter(offer => {
-        for (let i = 0; i < filters.length; i++) {
-            const { value, accessor } = filters[i]
-            if (value.toLowerCase() !== String(offer[accessor]).toLowerCase()) {
+        for (let accessor in filterGroup) {
+            const value = String(offer[accessor]).toLowerCase()
+            if (value in filterGroup[accessor]) {
+                continue
+            } else {
                 return false
             }
         }
