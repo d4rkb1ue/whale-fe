@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Line, Pie, defaults } from 'react-chartjs-2'
+import { Bar, Pie, defaults } from 'react-chartjs-2'
 import { getOfferCountByYear, getOfferCountByCompany } from "../utils";
 import Chart from './Chart'
 
@@ -11,7 +11,7 @@ export default class Charts extends Component {
         labels,
         datasets: datas.map(data => ({ data }))
     })
-    
+
     makeElementListener = accessor => {
         const { addFilter } = this.props
         return (e) => {
@@ -42,8 +42,9 @@ export default class Charts extends Component {
 
         // make offer by year Line chart
         ({ labels, counts } = getOfferCountByYear(offers));
+        onClick = this.makeElementListener('year')
         // redraw is necessary for <Line /> to animate once loaded
-        chart = <Line data={this.makeData(labels, [counts])} redraw={true} />
+        chart = <Bar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
             color: 'red',
             header: 'Offer by Year',

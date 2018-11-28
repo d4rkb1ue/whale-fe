@@ -37,7 +37,7 @@ const getFilteredOffers = (offers, filters) => {
     return offers.filter(offer => {
         for (let i = 0; i < filters.length; i++) {
             const { value, accessor } = filters[i]
-            if (value.toLowerCase() !== offer[accessor].toLowerCase()) {
+            if (value.toLowerCase() !== String(offer[accessor]).toLowerCase()) {
                 return false
             }
         }
