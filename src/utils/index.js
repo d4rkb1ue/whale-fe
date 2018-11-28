@@ -53,3 +53,7 @@ export function getOfferCountByYear(offers) {
 export function getOfferCountByCompany(offers) {
     return offerCountBy(offers, 'company_name', (a, b) => b.count - a.count)
 }
+
+export function getOfferCountByDegree(offers) {
+    return offerCountBy(offers, 'degree', (a, b) => b.count - a.count)
+}
