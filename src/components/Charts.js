@@ -19,6 +19,20 @@ export default class Charts extends Component {
 
     makeElementListener = accessor => {
         const { addFilter } = this.props
+        if (accessor === 'season') {
+            return (e) => {
+                e = e[0]
+                if (!e || !e._index) {
+                    console.error('chart on click', e)
+                    return
+                }
+                if (e._index === 0) { e._model.label = '4-6' }
+                else if (e._index === 1) { e._model.label = '7-9' }
+                else if (e._index === 2) { e._model.label = '10-12' }
+                else if (e._index === 3) { e._model.label = '1-3' }
+                addFilter(accessor, e._model.label)
+            }
+        }
         return (e) => {
             // only take first element
             e = e[0]
@@ -66,7 +80,7 @@ export default class Charts extends Component {
             chart,
         });
 
-        // make offer by experience  chart
+        // make offer by experience chart
         ({ labels, counts } = getOfferCountByExperience(offers));
         onClick = this.makeElementListener('experience_level')
         chart = <HorizontalBar data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />

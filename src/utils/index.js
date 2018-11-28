@@ -1,4 +1,4 @@
-import { SHOW_YEAR_BEFORE, SHOW_YEAR_LATER } from '../constants/config'
+import { SHOW_YEAR_BEFORE, SHOW_YEAR_LATER, OFFER_HEADER_CHOICES } from '../constants/config'
 function offerCountBy (offers, para, sortFunc) {
     let counter = {}
     offers.forEach(o => {
@@ -63,7 +63,24 @@ export function getOfferCountByDegree(offers) {
 }
 
 export function getOfferCountBySeason(offers) {
-    return offerCountBy(offers, 'season', (a, b) => b.count - a.count)
+    const choice = OFFER_HEADER_CHOICES['season']
+        if (!choice) { return }
+    const month2season = (value) => {
+        if (!value) { return }
+        let res = choice.find(s => s.value === value)
+        return res && res.text
+    }
+    const SEASON_ORDINAL = {
+        "1-3": 3,
+        "4-6": 0,
+        "7-9": 1,
+        "10-12": 2
+    }
+    let res = offerCountBy(offers, 'season', (a, b) => SEASON_ORDINAL[a.season] - SEASON_ORDINAL[b.season])
+    for (let i = 0; i < res.labels.length; i++) {
+        res.labels[i] = month2season(res.labels[i]);
+    }
+    return res;
 }
 
 export function getOfferCountByExperience(offers) {
