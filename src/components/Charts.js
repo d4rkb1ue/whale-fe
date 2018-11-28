@@ -22,7 +22,7 @@ export default class Charts extends Component {
             var r = Math.floor(Math.random() * 255);
             var g = Math.floor(Math.random() * 255);
             var b = Math.floor(Math.random() * 255);
-            colors.push("rgb(" + r + "," + g + "," + b + ")");
+            colors.push("rgba(" + r + "," + g + "," + b + ", 0.6)");
         }
         return colors;
     };
