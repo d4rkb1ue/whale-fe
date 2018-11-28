@@ -32,6 +32,13 @@ export function getAvg(offers) {
     return ret || 0
 }
 
+export function getMid(offers) {
+    if (!offers || !offers.length) { return 0 }
+    let clone = offers.slice()
+    clone.sort((a, b) => a['base_salary'] - b['base_salary'])
+    return clone[Math.floor(clone.length / 2)]['base_salary']
+}
+
 export function getOfferCountByLocation(offers) {
     return offerCountBy(offers, 'area', (a, b) => b.count - a.count)
 }

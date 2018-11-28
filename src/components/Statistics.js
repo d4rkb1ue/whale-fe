@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Statistic } from 'semantic-ui-react'
-import { getAvg, getOfferCountByLocation } from '../utils'
+import { getAvg, getMid, getOfferCountByLocation } from '../utils'
 import { randomURI } from '../utils'
 
 export default class Statistics extends Component {
@@ -38,6 +38,10 @@ export default class Statistics extends Component {
             {
                 value: Math.round(getAvg(offers)/1000) + 'k',
                 label: 'Average Base'
+            },
+            {
+                value: Math.round(getMid(offers)/1000) + 'k',
+                label: 'Mid Base'
             },
             {
                 value: hostestLocation || 'None',
