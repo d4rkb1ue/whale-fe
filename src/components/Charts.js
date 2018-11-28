@@ -5,7 +5,8 @@ import {
     getOfferCountByCompany, 
     getOfferCountByDegree,
     getOfferCountBySeason,
-    getOfferCountByExperience } from "../utils";
+    getOfferCountByExperience, 
+    getOfferCountBySalary } from "../utils";
 import Chart from './Chart'
 
 defaults.global.legend.display = false
@@ -31,6 +32,16 @@ export default class Charts extends Component {
                 else if (e._index === 2) { e._model.label = '10-12' }
                 else if (e._index === 3) { e._model.label = '1-3' }
                 addFilter(accessor, e._model.label)
+            }
+        }
+        if (accessor === 'base_salary') {
+            return (e) => {
+                e = e[0]
+                if (!e || !e._index || !e._xScale || !e._xScale.ticks) {
+                    console.error('chart on click', e)
+                    return
+                }
+                addFilter(accessor, e._xScale.ticks[e._index])
             }
         }
         return (e) => {
@@ -95,8 +106,18 @@ export default class Charts extends Component {
         onClick = this.makeElementListener('season')
         chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
         charts.push({
-            color: 'green',
+            color: 'orange',
             header: 'Offer by Season',
+            chart,
+        });
+
+        // make offer by salary Line chart
+        ({ labels, counts } = getOfferCountBySalary(offers));
+        onClick = this.makeElementListener('base_salary')
+        chart = <Line data={this.makeData(labels, [counts])} redraw={true} onElementsClick={onClick} />
+        charts.push({
+            color: 'green',
+            header: 'Offer by Salary',
             chart,
         });
 
