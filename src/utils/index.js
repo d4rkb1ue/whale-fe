@@ -32,6 +32,10 @@ export function getAvg(offers) {
     return ret || 0
 }
 
+export function getOfferCountByLocation(offers) {
+    return offerCountBy(offers, 'area', (a, b) => b.count - a.count)
+}
+
 export function randomURI() {
     return Math.random().toString(36).substr(2);
 }
