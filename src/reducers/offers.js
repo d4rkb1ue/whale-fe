@@ -1,6 +1,6 @@
-import * as Action from '../constants/ApiActions'
+import { LOADING_OFFERS, RECEIVE_OFFERS } from '../actions/ApiActions'
 
-const INITIAL_STATE = { 
+const INITIAL_STATE = {
     offers: [],
     loading: {
         isLoading: false,
@@ -8,10 +8,10 @@ const INITIAL_STATE = {
     },
 }
 
-export default (state = INITIAL_STATE, action) => {
+export default function (state = INITIAL_STATE, action) {
     const { type } = action
     switch (type) {
-        case Action.LOADING_OFFERS: {
+        case LOADING_OFFERS: {
             return {
                 ...state,
                 loading: {
@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             }
         }
-        case Action.RECEIVE_OFFERS: {
+        case RECEIVE_OFFERS: {
             return {
                 ...state,
                 offers: action.offers,

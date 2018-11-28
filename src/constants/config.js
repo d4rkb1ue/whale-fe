@@ -9,9 +9,11 @@ export const OFFER_HEADER_CHOICES = {
         { key: '10-12', value: '10-12', text: 'Winter' },
     ]
 }
+export const SHOW_YEAR_BEFORE = 3
+export const SHOW_YEAR_LATER = 1
 export const OFFER_HEADER = [
     {
-        Header: 'CompanyName',
+        Header: 'Company',
         accessor: 'company_name',
     },
     {
@@ -34,6 +36,30 @@ export const OFFER_HEADER = [
         Header: 'Degree',
         accessor: 'degree',
     },
+    /**
+     *  BayArea
+     *  Greater Seattle Area
+     *  Greater New York Area
+     *  Greater Boston Area
+     *  Texas
+     *  Southern California
+     *  Pittsburgh
+     *  Chicago
+     *  DC
+     *  美国其他地区
+     *  Canada
+     *  欧洲
+     *  澳大利亚
+     *  北京
+     *  上海
+     *  广州
+     *  成都
+     *  沈阳
+     *  国内其他地区
+     *  亚洲其他地区
+     *  South America
+     *  Everywhere else
+     */
     {
         Header: 'Area',
         accessor: 'area',
@@ -46,12 +72,16 @@ export const OFFER_HEADER = [
     //     Header: 'experience',
     //     accessor: 'experience',
     // },
+    // {
+    //     Header: 'post_time',
+    //     accessor: 'post_time',
+    // },
     {
-        Header: 'post_time',
-        accessor: 'post_time',
+        Header: 'Year',
+        accessor: 'year',
     },
     {
-        Header: 'season mo.',
+        Header: 'Season',
         accessor: 'season',
     },
     {
