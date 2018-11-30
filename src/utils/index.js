@@ -17,7 +17,6 @@ function offerCountBy (offers, para, sortFunc) {
     if (sortFunc) {
         arr.sort(sortFunc)
     }
-    console.log(arr)
 
     return {
         labels: arr.map(obj => obj[para]),
@@ -38,22 +37,23 @@ function offerCountByWithCompanyName (offers, para, sortFunc) {
     })
     let arr = []
     for (const company in counter) {
+        arr.push({
+            company_name: company,
+            salary2Count: {}
+        })
         for (const salary in counter[company]) {
-            arr.push({
-                company_name: company,
-                [para]: salary,
-                count: counter[company][salary]
-            })
+            // console.log(company + "-" + salary + "-" + counter[company][salary])
+            arr[arr.length - 1].salary2Count[salary] = counter[company][salary]
         }
     }
-    console.log(arr)
+
     if (sortFunc) {
         arr.sort(sortFunc)
     }
+
     return {
         companyNames: arr.map(obj => obj['company_name']),
-        labels: arr.map(obj => obj[para]),
-        counts: arr.map(obj => obj.count)
+        companySalary2Count: arr
     }
 }
 

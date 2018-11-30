@@ -13,7 +13,7 @@ defaults.global.legend.display = false
 // defaults.global.redraw = true
 
 export default class Charts extends Component {
-    
+
     // chartjs2 does not support automatically assigning different colors to different portions of the chart.
     // this function is for dynamically generating different colors for different portions on the chart.
     _dynamicColors = (n) => {
@@ -60,10 +60,24 @@ export default class Charts extends Component {
         }]
     })
 
-    makeBubbleData = (labels, datas) => ({
+    _generateBubbles = (companySalary2Count) => {
+        let res = []
+        for (let i = 0; i < companySalary2Count.length; i++) {
+            for (const salary in companySalary2Count[i].salary2Count) {
+                res.push({
+                    x: i,
+                    y: salary,
+                    r: companySalary2Count[i].salary2Count[salary]
+                })
+            }
+        }
+        return res;
+    }
+
+    makeBubbleData = (companySalary2Count) => ({
         labels: ['January', 'ad'],
         datasets: [{
-            label:[ 'My First dataset', 'sadf'],
+            label: "",
             fill: false,
             lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
@@ -81,10 +95,7 @@ export default class Charts extends Component {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [
-                {x:'amazon',y:20,r:5},
-                {x:'google',y:40,r:5}
-            ]
+            data: this._generateBubbles(companySalary2Count)
         }]
     })
 
@@ -182,9 +193,37 @@ export default class Charts extends Component {
         });
 
         // make offer by salary Line chart
-        ({ labels, counts, companyNames } = getOfferCountBySalary(offers));
+        let companySalary2Count;
+        ({ companySalary2Count, companyNames } = getOfferCountBySalary(offers));
         onClick = this.makeElementListener('base_salary')
-        chart = <Bubble data={this.makeBubbleData(labels, [counts, companyNames])} redraw={true} onElementsClick={onClick} />
+        chart = <Bubble 
+                    data={this.makeBubbleData(companySalary2Count)} 
+                    redraw={true} 
+                    onElementsClick={onClick} 
+                    options={{
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 1,
+                                    stepSize: 1,
+                                    maxRotation: 65,
+                                    minRotation: 65,
+                                    callback: function(value, index, values) {
+                                        return companyNames[index];
+                                    }
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            callbacks: {
+                               label: function(t, d) {
+                                    return companyNames[t.xLabel] + ' - $' + t.yLabel + ' - ' + d.datasets[t.datasetIndex].data[t.xLabel].r;
+                               }
+                            }
+                         }
+                    }}
+                />
         charts.push({
             color: 'green',
             header: 'by Salary',
