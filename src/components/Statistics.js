@@ -41,12 +41,12 @@ export default class Statistics extends Component {
             },
             {
                 value: Math.round(getMid(offers)/1000) + 'k',
-                label: 'Mid Base'
+                label: 'Median Base'
             },
             {
                 value: hostestLocation || 'None',
                 valueType: 'text',
-                label: 'Hotest Location'
+                label: 'Hottest Location'
             },
         ]
         
