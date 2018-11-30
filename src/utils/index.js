@@ -42,8 +42,37 @@ function offerCountByWithCompanyName (offers, para, sortFunc) {
             salary2Count: {}
         })
         for (const salary in counter[company]) {
-            // console.log(company + "-" + salary + "-" + counter[company][salary])
-            arr[arr.length - 1].salary2Count[salary] = counter[company][salary]
+            // put all the salaries in range buckets
+            let bucketToPut = 190000;
+            if (salary < 70000) {
+                bucketToPut = 70000
+            } else if (salary < 80000) {
+                bucketToPut = 80000
+            } else if (salary < 90000) {
+                bucketToPut = 90000
+            } else if (salary < 100000) {
+                bucketToPut = 100000
+            } else if (salary < 110000) {
+                bucketToPut = 110000
+            } else if (salary < 120000) {
+                bucketToPut = 120000
+            } else if (salary < 130000) {
+                bucketToPut = 130000
+            } else if (salary < 140000) {
+                bucketToPut = 140000
+            } else if (salary < 150000) {
+                bucketToPut = 150000
+            } else if (salary < 160000) {
+                bucketToPut = 160000
+            } else if (salary < 170000) {
+                bucketToPut = 170000
+            } else if (salary < 180000) {
+                bucketToPut = 180000
+            } else {
+                bucketToPut = 190000
+            }
+            arr[arr.length - 1].salary2Count[bucketToPut] = arr[arr.length - 1].salary2Count[bucketToPut] || 0
+            arr[arr.length - 1].salary2Count[bucketToPut] += counter[company][salary]
         }
     }
 

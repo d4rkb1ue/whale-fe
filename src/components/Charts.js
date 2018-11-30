@@ -67,7 +67,7 @@ export default class Charts extends Component {
                 res.push({
                     x: i,
                     y: salary,
-                    r: companySalary2Count[i].salary2Count[salary]
+                    r: (companySalary2Count[i].salary2Count[salary] / 5)
                 })
             }
         }
@@ -213,12 +213,22 @@ export default class Charts extends Component {
                                         return companyNames[index];
                                     }
                                 }
-                            }]
+                            }],
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        callback: function(label, index, labels) {
+                                            return label/1000+'k';
+                                        }
+                                    }
+                                }
+                            ]
                         },
                         tooltips: {
                             callbacks: {
                                label: function(t, d) {
-                                    return companyNames[t.xLabel] + ' - $' + t.yLabel + ' - ' + d.datasets[t.datasetIndex].data[t.xLabel].r;
+                                    return companyNames[t.xLabel] + ' - $' + t.yLabel + ' - ' + d.datasets[t.datasetIndex].data[t.index].r * 5; 
+                                    // 'r' is the radius, * 5 to get the real count
                                }
                             }
                          }
