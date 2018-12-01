@@ -17,11 +17,75 @@ function offerCountBy (offers, para, sortFunc) {
     if (sortFunc) {
         arr.sort(sortFunc)
     }
+
     return {
         labels: arr.map(obj => obj[para]),
         counts: arr.map(obj => obj.count)
     }
 }
+
+// Company name is unique
+function offerCountByWithCompanyName (offers, para, sortFunc) {
+    let counter = {} // Map<company_name, Map<salary, count>>
+    offers.forEach(o => {
+        let c = o['company_name']
+        let p = o[para]
+        if(!p) { return }
+        counter[c] = counter[c] || {}
+        counter[c][p] = counter[c][p] || 0
+        counter[c][p]++
+    })
+    let arr = []
+    for (const company in counter) {
+        arr.push({
+            company_name: company,
+            salary2Count: {}
+        })
+        for (const salary in counter[company]) {
+            // put all the salaries in range buckets
+            let bucketToPut = 190000;
+            if (salary < 70000) {
+                bucketToPut = 70000
+            } else if (salary < 80000) {
+                bucketToPut = 80000
+            } else if (salary < 90000) {
+                bucketToPut = 90000
+            } else if (salary < 100000) {
+                bucketToPut = 100000
+            } else if (salary < 110000) {
+                bucketToPut = 110000
+            } else if (salary < 120000) {
+                bucketToPut = 120000
+            } else if (salary < 130000) {
+                bucketToPut = 130000
+            } else if (salary < 140000) {
+                bucketToPut = 140000
+            } else if (salary < 150000) {
+                bucketToPut = 150000
+            } else if (salary < 160000) {
+                bucketToPut = 160000
+            } else if (salary < 170000) {
+                bucketToPut = 170000
+            } else if (salary < 180000) {
+                bucketToPut = 180000
+            } else {
+                bucketToPut = 190000
+            }
+            arr[arr.length - 1].salary2Count[bucketToPut] = arr[arr.length - 1].salary2Count[bucketToPut] || 0
+            arr[arr.length - 1].salary2Count[bucketToPut] += counter[company][salary]
+        }
+    }
+
+    if (sortFunc) {
+        arr.sort(sortFunc)
+    }
+
+    return {
+        companyNames: arr.map(obj => obj['company_name']),
+        companySalary2Count: arr
+    }
+}
+
 
 const THIS_YEAR = (new Date()).getFullYear()
 const START_YEAR = THIS_YEAR - SHOW_YEAR_BEFORE
@@ -95,5 +159,5 @@ export function getOfferCountByExperience(offers) {
 }
 
 export function getOfferCountBySalary(offers) {
-    return offerCountBy(offers, 'base_salary', (a, b) => a.base_salary - b.base_salary)
+    return offerCountByWithCompanyName(offers, 'base_salary', (a, b) => b.company_name - a.company_name) // alphabetical order on company name 
 }

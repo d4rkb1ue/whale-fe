@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Label, Input } from 'semantic-ui-react'
+import { Menu, Input } from 'semantic-ui-react'
 
 export default class SearchBar extends Component {
     render() {
