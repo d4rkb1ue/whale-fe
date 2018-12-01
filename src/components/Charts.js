@@ -216,10 +216,10 @@ export default class Charts extends Component {
                             xAxes: [{
                                 ticks: {
                                     min: 0,
-                                    max: 1,
+                                    max: companyNames.length,
                                     stepSize: 1,
-                                    maxRotation: 65,
-                                    minRotation: 65,
+                                    maxRotation: 80,
+                                    minRotation: 80,
                                     callback: function(value, index, values) {
                                         return companyNames[index];
                                     }
