@@ -122,7 +122,18 @@ export default class Charts extends Component {
                     console.error('chart on click', e)
                     return
                 }
+                console.log(e)
                 addFilter(accessor, e._xScale.ticks[e._index])
+            }
+        }
+        if (accessor === 'bubble_base_salary') {
+            return (e) => {
+                e = e[0]
+                if (!e || !e._index || !e._xScale || !e._xScale.ticks) {
+                    console.error('chart on click', e)
+                    return
+                }
+                addFilter('base_salary', e._yScale.chart.config.data.datasets[0].data[e._index].y)
             }
         }
         return (e) => {
@@ -195,7 +206,7 @@ export default class Charts extends Component {
         // make offer by salary Line chart
         let companySalary2Count;
         ({ companySalary2Count, companyNames } = getOfferCountBySalary(offers));
-        onClick = this.makeElementListener('base_salary')
+        onClick = this.makeElementListener('bubble_base_salary')
         chart = <Bubble 
                     data={this.makeBubbleData(companySalary2Count)} 
                     redraw={true} 
