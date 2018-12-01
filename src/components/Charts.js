@@ -215,13 +215,17 @@ export default class Charts extends Component {
                         scales: {
                             xAxes: [{
                                 ticks: {
-                                    min: 0,
+                                    min: -1,
                                     max: companyNames.length,
+                                    beginAtZero: true,
                                     stepSize: 1,
                                     maxRotation: 80,
                                     minRotation: 80,
                                     callback: function(value, index, values) {
-                                        return companyNames[index];
+                                        if (index === 0) {
+                                            return ""
+                                        }
+                                        return companyNames[index - 1];
                                     }
                                 }
                             }],
