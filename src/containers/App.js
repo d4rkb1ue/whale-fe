@@ -9,6 +9,7 @@ import Statistics from '../components/Statistics'
 import { Container, Divider } from 'semantic-ui-react'
 import { addFilter, removeFilter } from '../actions/FilterActions'
 import Filter from '../dataStructure/Filter'
+import { getCompanies } from '../utils'
 
 class App extends Component {
     componentDidMount() {
@@ -17,11 +18,11 @@ class App extends Component {
     }
 
     render() {
-        const { offers, loading, filters, addFilter, deleteFilter } = this.props
+        const { offers, companies, loading, filters, addFilter, deleteFilter } = this.props
         return (
             <Container>
                 <Divider hidden />
-                <SearchBar />
+                <SearchBar companies={companies} addFilter={addFilter} />
                 <Divider hidden />
                 <FilterTags filters={filters} deleteFilter={deleteFilter} />
                 <Divider hidden />
@@ -61,7 +62,8 @@ const mapStateToProps = state => {
     return {
         offers: getFilteredOffers(offers.offers, filters),
         loading: offers.loading,
-        filters
+        filters,
+        companies: getCompanies(offers.offers),
     }
 }
 

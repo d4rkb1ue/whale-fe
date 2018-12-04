@@ -1,8 +1,8 @@
 import { ADD_FILTER, REMOVE_FILTER } from '../actions/FilterActions'
 
 import Filter from '../dataStructure/Filter'
-const INITIAL_STATE = [ new Filter('company_name', 'Google'), new Filter('company_name', 'Amazon') ]
-// const INITIAL_STATE = []
+// const INITIAL_STATE = [ new Filter('company_name', 'Google'), new Filter('company_name', 'Amazon') ]
+const INITIAL_STATE = []
 
 export default function (state = INITIAL_STATE, action) {
     function isDuplicateFilter(filters, filter) {
