@@ -105,7 +105,6 @@ export default class Charts extends Component {
             return (e) => {
                 e = e[0]
                 if (!e || !e._index) {
-                    console.error('chart on click', e)
                     return
                 }
                 if (e._index === 0) { e._model.label = '4-6' }
@@ -119,10 +118,8 @@ export default class Charts extends Component {
             return (e) => {
                 e = e[0]
                 if (!e || !e._index || !e._xScale || !e._xScale.ticks) {
-                    console.error('chart on click', e)
                     return
                 }
-                console.log(e)
                 addFilter(accessor, e._xScale.ticks[e._index])
             }
         }
@@ -130,7 +127,6 @@ export default class Charts extends Component {
             return (e) => {
                 e = e[0]
                 if (!e || !e._index || !e._xScale || !e._xScale.ticks) {
-                    console.error('chart on click', e)
                     return
                 }
                 addFilter('base_salary', e._yScale.chart.config.data.datasets[0].data[e._index].y)
@@ -140,7 +136,6 @@ export default class Charts extends Component {
             // only take first element
             e = e[0]
             if (!e || !e._model || !e._model.label) {
-                console.error('chart on click', e)
                 return
             }
             addFilter(accessor, e._model.label)

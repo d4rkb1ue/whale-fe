@@ -161,3 +161,15 @@ export function getOfferCountByExperience(offers) {
 export function getOfferCountBySalary(offers) {
     return offerCountByWithCompanyName(offers, 'base_salary', (a, b) => b.company_name - a.company_name) // alphabetical order on company name 
 }
+
+export function getCompanies(offers) {
+    let map = {}
+    offers.forEach(o => {
+        map[o['company_name']] = 1
+    })
+    let ret = []
+    for (let i in map) {
+        ret.push(i)
+    }
+    return ret
+}
